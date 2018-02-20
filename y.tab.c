@@ -495,9 +495,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    70,    70,    73,    74,    77,    84,    85,    86,    90,
-      92,   103,   105,   107,   109,   111,   113,   115,   117,   119,
-     121,   127
+       0,    70,    70,    73,    74,    77,    88,    89,    90,    94,
+      96,   107,   109,   111,   113,   115,   117,   119,   121,   123,
+     125,   131
 };
 #endif
 
@@ -1416,26 +1416,30 @@ yyreduce:
 /* Line 1792 of yacc.c  */
 #line 78 "lab2docalc.y"
     {if( Search((yyvsp[(2) - (4)].string)) == -1 ){
-			Insert((yyvsp[(2) - (4)].string), dex++);
+			if(dex < 26){
+				Insert((yyvsp[(2) - (4)].string),dex++);
+			}else{
+				fprintf(stderr,"Cannot enter Variable.\nReached maximum number of variables\n");	
+				}
 			}
 	 	}
     break;
 
   case 8:
 /* Line 1792 of yacc.c  */
-#line 87 "lab2docalc.y"
+#line 91 "lab2docalc.y"
     { yyerrok; }
     break;
 
   case 9:
 /* Line 1792 of yacc.c  */
-#line 91 "lab2docalc.y"
+#line 95 "lab2docalc.y"
     { fprintf(stderr,"the anwser is %d\n", (yyvsp[(1) - (1)].value)); }
     break;
 
   case 10:
 /* Line 1792 of yacc.c  */
-#line 93 "lab2docalc.y"
+#line 97 "lab2docalc.y"
     {int taddr = Search((yyvsp[(1) - (3)].string));
 				fprintf(stderr,"address %d\n", taddr);
 				if(taddr != -1){
@@ -1448,61 +1452,61 @@ yyreduce:
 
   case 11:
 /* Line 1792 of yacc.c  */
-#line 104 "lab2docalc.y"
+#line 108 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(2) - (3)].value); }
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
-#line 106 "lab2docalc.y"
+#line 110 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(1) - (3)].value) - (yyvsp[(3) - (3)].value); }
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
-#line 108 "lab2docalc.y"
+#line 112 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(1) - (3)].value) + (yyvsp[(3) - (3)].value); }
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
-#line 110 "lab2docalc.y"
+#line 114 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(1) - (3)].value) / (yyvsp[(3) - (3)].value); }
     break;
 
   case 15:
 /* Line 1792 of yacc.c  */
-#line 112 "lab2docalc.y"
+#line 116 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(1) - (3)].value) * (yyvsp[(3) - (3)].value); }
     break;
 
   case 16:
 /* Line 1792 of yacc.c  */
-#line 114 "lab2docalc.y"
+#line 118 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(1) - (3)].value) % (yyvsp[(3) - (3)].value); }
     break;
 
   case 17:
 /* Line 1792 of yacc.c  */
-#line 116 "lab2docalc.y"
+#line 120 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(1) - (3)].value) & (yyvsp[(3) - (3)].value); }
     break;
 
   case 18:
 /* Line 1792 of yacc.c  */
-#line 118 "lab2docalc.y"
+#line 122 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(1) - (3)].value) | (yyvsp[(3) - (3)].value); }
     break;
 
   case 19:
 /* Line 1792 of yacc.c  */
-#line 120 "lab2docalc.y"
+#line 124 "lab2docalc.y"
     { (yyval.value) = -(yyvsp[(2) - (2)].value); }
     break;
 
   case 20:
 /* Line 1792 of yacc.c  */
-#line 122 "lab2docalc.y"
+#line 126 "lab2docalc.y"
     { int taddr = Search((yyvsp[(1) - (1)].string));
 				if(taddr != -1){
 					(yyval.value) = regs[taddr]; fprintf(stderr,"found a variable value = %d\n",regs[taddr]);
@@ -1512,13 +1516,13 @@ yyreduce:
 
   case 21:
 /* Line 1792 of yacc.c  */
-#line 127 "lab2docalc.y"
+#line 131 "lab2docalc.y"
     { (yyval.value) = (yyvsp[(1) - (1)].value); }
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 1522 "y.tab.c"
+#line 1526 "y.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1750,7 +1754,7 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 132 "lab2docalc.y"
+#line 136 "lab2docalc.y"
 	/* end of rules, start of program */
 
 main()

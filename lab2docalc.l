@@ -17,7 +17,7 @@ int mydebug=1;
 %%
 int		{if (mydebug) fprintf(stderr,"INT found\n"); 
 			return INT;}
-[a-z][a-z]*	{if (mydebug) fprintf(stderr,"String found\n"); 
+[a-zA-Z][a-zA-Z0-9]*	{if (mydebug) fprintf(stderr,"String found\n"); 
                        yylval.string=strdup(yytext); return(VARIABLE);}
 [0-9][0-9]*	{if (mydebug) fprintf(stderr,"Digit found\n"); 
                        yylval.value=atoi((const char *)yytext); return(INTEGER);}

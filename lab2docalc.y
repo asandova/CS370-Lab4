@@ -76,7 +76,11 @@ decls	: 	/* empty */
 
 dec	:	INT VARIABLE ';' '\n'
 		{if( Search($2) == -1 ){
-			Insert($2, dex++);
+			if(dex < 26){
+				Insert($2,dex++);
+			}else{
+				fprintf(stderr,"Cannot enter Variable.\nReached maximum number of variables\n");	
+				}
 			}
 	 	}	
 	;
