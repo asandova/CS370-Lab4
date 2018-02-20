@@ -75,12 +75,15 @@ decls	: 	/* empty */
 	;
 
 dec	:	INT VARIABLE ';' '\n'
-		{if( Search($2) == -1 ){
-			if(dex < 26){
-				Insert($2,dex++);
-			}else{
-				fprintf(stderr,"Cannot enter Variable.\nReached maximum number of variables\n");	
+		{
+			if( Search($2) == -1 ){
+				if(dex < 26){
+					Insert($2,dex++);
+				}else{
+					fprintf(stderr,"Cannot enter Variable.\nReached maximum number of variables\n");	
 				}
+			}else{
+				fprintf(stderr,"Variable already defined.\n");	
 			}
 	 	}	
 	;
@@ -94,12 +97,15 @@ list	:	/* empty */
 stat	:	expr
 			{ fprintf(stderr,"the anwser is %d\n", $1); }
 	|	VARIABLE '=' expr
-			{int taddr = Search($1);
+			{
+				int taddr = Search($1);
 				fprintf(stderr,"address %d\n", taddr);
 				if(taddr != -1){
 					fprintf(stderr,"assignment address %d\n", taddr);
 					fprintf(stderr,"assignment value %d\n", $3);
 					regs[taddr] = $3;
+				}else{
+					fprintf(stderr,"Variable \"%s\" has not been defined\nCannot be used", $1);
 				}
 			}
 	;
